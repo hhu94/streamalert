@@ -22,13 +22,14 @@ def searchAndAlert():
         streamTitle = json["status"]
         for word in BAD_WORDS:
             if word in str.lower(streamTitle):
-                subject = "Alert! Streamer using bad word!"
+                recipient = "/r/LighthouseSherpas" # recipient of alert message
+                subject = "Alert! Streamer using bad word!" # subject of message
                 message = (
                     streamer + " has included the word " + word + " in his/her"
                     " stream title.\n\nThe title is: \"" + streamTitle +
                     "\".\n\nHere is a link to the stream. "
                     "http://www.twitch.tv/" + streamer)
-                r.send_message("/r/LighthouseSherpas", subject, message)
+                r.send_message(recipient, subject, message)
                 print(message)
                 print("Modmail has been sent.\n")
                 break
