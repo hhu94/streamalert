@@ -22,8 +22,12 @@ def searchAndAlert():
         streamTitle = json["status"]
         for word in BAD_WORDS:
             if word in str.lower(streamTitle):
-                recipient = "/r/LighthouseSherpas" # recipient of alert message
-                subject = "Alert! Streamer using bad word!" # subject of message
+                # Recipient of alert message, without /u/. If recipient is
+                # a subreddit, add /r/
+                recipient = "/r/LighthouseSherpas"
+                # Subject of alert message.
+                subject = "Alert! Streamer using bad word!"
+                # Content of alert message.
                 message = (
                     streamer + " has included the word " + word + " in his/her"
                     " stream title.\n\nThe title is: \"" + streamTitle +
