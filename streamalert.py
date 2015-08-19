@@ -1,8 +1,16 @@
+# streamalert is a reddit bot that alerts you when a Twitch streamer in
+# your list is using undesirable words in their stream title.
+# Made with Python 3.4.0 by /u/twistitup
+
 import praw, oaux, requests, time, json
 
+# List of targeted streamers by their twitch ids.
 STREAMERS = ["nl_kripp", "popskyy"]
+# List of words you want to look out for.
 BAD_WORDS = ["fun", "terraria"]
+# Twitch app client id, don't worry about it.
 CLIENT_ID = 'k0omm8abqfbeqk073wqnkwhcg98z7ew'
+# Time in between each search.
 SLEEP_TIME = 300
 
 def searchAndAlert():
@@ -20,7 +28,7 @@ def searchAndAlert():
                     " stream title.\n\nThe title is: \"" + streamTitle +
                     "\".\n\nHere is a link to the stream. "
                     "http://www.twitch.tv/" + streamer)
-                r.send_message("twistitup", subject, message)
+                r.send_message("/r/LighthouseSherpas", subject, message)
                 print(message)
                 print("Modmail has been sent.\n")
                 break
