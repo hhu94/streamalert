@@ -10,8 +10,17 @@ STREAMERS = ["nl_kripp", "popskyy"]
 BAD_WORDS = ["fun", "terraria"]
 # Twitch app client id, don't worry about it.
 CLIENT_ID = 'k0omm8abqfbeqk073wqnkwhcg98z7ew'
-# Time in between each search.
-SLEEP_TIME = 300
+
+# The below time values should not be changed without
+# previous thought. Always keep in mind not to send too
+# many requests to Twitch's servers. Otherwise the bot will
+# get IP banned from using the API.
+
+# Time in between each channel scan.
+TIME_BETWEEN_SCANS = 10
+# Time in between each iteration. That is, time waited
+# after all streamers are scanned until repeating the process.
+TIME_BETWEEN_ITERATIONS = 300
 
 def searchAndAlert():
     for streamer in STREAMERS:
@@ -37,13 +46,14 @@ def searchAndAlert():
                 print(message)
                 print("Modmail has been sent.\n")
                 break
-
+        time.sleep(TIME_BETWEEN_SCANS)
+        
 if __name__ == "__main__":
     r = oaux.login()
     while True:
         try:
             searchAndAlert()
-            time.sleep(SLEEP_TIME)
+            time.sleep(TIME_BETWEEN_ITERATIONS)
         except KeyboardInterrupt:
             print("Shutting down.")
             break
